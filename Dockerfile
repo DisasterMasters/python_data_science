@@ -1,5 +1,6 @@
 FROM ubuntu:18.04 as opencv-builder
-MAINTAINER "Audris Mockus"
+MAINTAINER "Audris Mockusi based on Andrey Maksimov's Dockerfile"
+
 
 RUN apt update && DEBIAN_FRONTEND='noninteractive' apt install -y  curl gnupg apt-transport-https
 
@@ -11,7 +12,7 @@ RUN apt-get update && apt-get install -y mongodb-org-shell openssh-server \
     lsof sudo sssd  sssd-tools git tmux  zsh  \
     wget ca-certificates \
     build-essential cmake pkg-config \
-    libjpeg8-dev libtiff5-dev libjasper-dev libpng12-dev \
+    libjpeg8-dev libtiff5-dev libjasper-dev  \
     libavcodec-dev libavformat-dev libswscale-dev libv4l-dev \
     libxvidcore-dev libx264-dev \
     libgtk-3-dev \
@@ -39,7 +40,8 @@ RUN cd opencv-3.3.1 && \
     ldconfig && \
     cd / && rm -Rf /opencv-3.3.1 /opencv_contrib-3.3.1
 
-RUN pip3 install tensorflow && \
+RUN pip3 install --upgrade pip && \
+    pip3 install tensorflow && \
     pip3 install numpy pandas sklearn matplotlib seaborn jupyter pyyaml h5py && \
     pip3 install keras --no-deps && \
     pip3 install opencv-python && \
