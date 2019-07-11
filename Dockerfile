@@ -8,7 +8,7 @@ RUN apt update && DEBIAN_FRONTEND='noninteractive' apt install -y  curl gnupg ap
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 9DA31620334BD75D9DCB49F368818C72E52529D4 
 RUN echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" > /etc/apt/sources.list.d/mongodb-org-4.0.list
 
-RUN apt-get update && apt-get install -y mongodb-org-shell openssh-server \
+RUN apt-get update && apt-get install -y locale mongodb-org-shell openssh-server \
     lsof sudo sssd  sssd-tools git tmux  zsh  \
     wget ca-certificates \
     build-essential cmake pkg-config \
@@ -17,6 +17,9 @@ RUN apt-get update && apt-get install -y mongodb-org-shell openssh-server \
     python3-yaml python3-msgpack \
     libfreetype6-dev libhdf5-dev && \
     rm -rf /var/lib/apt/lists/*
+
+RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && \
+    locale-gen
 
 RUN pip3 install --upgrade pip
 
