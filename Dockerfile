@@ -13,12 +13,14 @@ RUN apt-get update && apt-get install -y mongodb-org-shell openssh-server \
     wget ca-certificates \
     build-essential cmake pkg-config \
     libatlas-base-dev gfortran \
-    git curl vim python3-dev python3-pip \
+    git curl vim python3-dev python3-pip python3-tk \
+    python3-yaml python3-msgpack \
     libfreetype6-dev libhdf5-dev && \
     rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install --upgrade pip && \
-    pip3 install tensorflow && \
+RUN pip3 install --upgrade pip
+
+RUN pip3 install tensorflow && \
     pip3 install numpy pandas sklearn matplotlib seaborn jupyter pyyaml h5py && \
     pip3 install keras --no-deps && \
     pip3 install imutils
